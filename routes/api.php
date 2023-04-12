@@ -9,6 +9,8 @@ use App\Http\Controllers\API\FrontendController;
 use App\Http\Controllers\API\CartController;
 use App\Http\Controllers\API\CheckoutController;
 use App\Http\Controllers\API\OrderController;
+use App\Http\Controllers\API\HomeController;
+
 
 
 
@@ -28,7 +30,8 @@ Route::delete('delete-cartitem/{cart_id}', [CartController::class, 'deleteCartit
 
 Route::post('place-order', [CheckoutController::class, 'placeorder']);
 Route::post('validate-order', [CheckoutController::class, 'validateOrder']);
-
+// home
+Route::get('homefetchproducts', [HomeController::class, 'viewprod']);
 
 Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function () {
     Route::get('/checkingAuthenticated', function () {
