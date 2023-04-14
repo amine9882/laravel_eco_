@@ -32,6 +32,12 @@ Route::post('place-order', [CheckoutController::class, 'placeorder']);
 Route::post('validate-order', [CheckoutController::class, 'validateOrder']);
 // home
 Route::get('homefetchproducts', [HomeController::class, 'viewprod']);
+Route::get('homeproductsfeatured', [HomeController::class, 'featured']);
+Route::get('categoryidfour', [HomeController::class, 'four']);
+Route::get('categoryidone', [HomeController::class, 'one']);
+Route::get('categoryidtwo', [HomeController::class, 'two']);
+Route::get('categoryidthree', [HomeController::class, 'three']);
+
 
 Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function () {
     Route::get('/checkingAuthenticated', function () {
