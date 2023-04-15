@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\API;
+use App\Models\Rating;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\User;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -84,5 +87,7 @@ class FrontendController extends Controller
             ]);
         }
     }
+    
+    
 }
 

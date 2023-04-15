@@ -10,7 +10,7 @@ use App\Http\Controllers\API\CartController;
 use App\Http\Controllers\API\CheckoutController;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\HomeController;
-
+use App\Http\Controllers\API\RatingController;
 
 
 
@@ -22,6 +22,7 @@ Route::get('getCategory', [FrontendController::class, 'category']);
 Route::get('fetchproducts/{slug}',[FrontendController::class,'product']);
 Route::get('viewproductdetail/{category_slug}/{product_slug}', [FrontendController::class, 'viewproduct']);
 
+Route::post('/products/{product_id}/ratings', [RatingController::class, 'store']);
 
 Route::post('add-to-cart', [CartController::class, 'addtocart']);
 Route::get('cart', [CartController::class, 'viewcart']);

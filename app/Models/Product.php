@@ -24,7 +24,7 @@ class Product extends Model
         'popular',
         'status',
     ];
-
+    
     protected $with = ['category'];
     public function category()
     {
