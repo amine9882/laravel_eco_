@@ -24,6 +24,8 @@ Route::get('viewproductdetail/{category_slug}/{product_slug}', [FrontendControll
 
 Route::post('/products/{product_id}/ratings', [RatingController::class, 'store']);
 
+
+
 Route::post('add-to-cart', [CartController::class, 'addtocart']);
 Route::get('cart', [CartController::class, 'viewcart']);
 Route::put('cart-updatequantity/{cart_id}/{scope}', [CartController::class, 'updatequantity']);

@@ -18,6 +18,7 @@ class CreateRatingsTable extends Migration
             $table->bigInteger('user_id')->nullable();
             $table->bigInteger('product_id')->nullable();
             $table->bigInteger('rating')->nullable();
+            $table->string('comment');
             $table->timestamps();
         });
     }

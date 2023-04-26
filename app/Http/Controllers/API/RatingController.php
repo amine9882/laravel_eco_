@@ -17,6 +17,8 @@ class RatingController extends Controller
         
         $validatedData = $request->validate([
             'rating' => 'required|integer|between:1,5',
+            'comment' => 'string|max:191',
+
         ]);
 
             if(auth('sanctum')->check())
@@ -26,6 +28,7 @@ class RatingController extends Controller
            
             $rating = new Rating();
             $rating->rating = $validatedData['rating'];
+            $rating->comment = $validatedData['comment'];
             $rating->user_id = $user_id;
             $rating->product_id = $product_id;
             $rating->save();
@@ -46,3 +49,4 @@ class RatingController extends Controller
         }
     }
 }
+
