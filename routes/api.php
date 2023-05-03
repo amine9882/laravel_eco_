@@ -23,6 +23,11 @@ Route::get('fetchproducts/{slug}',[FrontendController::class,'product']);
 Route::get('viewproductdetail/{category_slug}/{product_slug}', [FrontendController::class, 'viewproduct']);
 
 Route::post('/products/{product_id}/ratings', [RatingController::class, 'store']);
+Route::get('/products/{id}/ratings',[RatingController::class, 'fatch']);
+// Route::get('/products/{id}/rating',  [RatingController::class, 'getProductRating']);
+// Route::get('/rating-products',[RatingController::class, 'index']);
+
+
 
 
 
@@ -33,6 +38,9 @@ Route::delete('delete-cartitem/{cart_id}', [CartController::class, 'deleteCartit
 
 Route::post('place-order', [CheckoutController::class, 'placeorder']);
 Route::post('validate-order', [CheckoutController::class, 'validateOrder']);
+
+
+
 // home
 Route::get('homefetchproducts', [HomeController::class, 'viewprod']);
 Route::get('homeproductsfeatured', [HomeController::class, 'featured']);
@@ -60,6 +68,8 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function () {
      Route::post('update-product/{id}', [ProductController::class, 'update']);
      // Orders
      Route::get('admin/orders', [OrderController::class, 'index']);
+     Route::get('admin/orderitems', [OrderController::class, 'store']);
+
      //logout
     Route::post('logout', [AuthController::class, 'logout']);
 

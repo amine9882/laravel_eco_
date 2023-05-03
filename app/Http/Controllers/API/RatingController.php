@@ -48,5 +48,58 @@ class RatingController extends Controller
                 ]);
         }
     }
+    // public function getProductRating($id)
+    // {   
+    //         $product = Product::where('id',$id)->first();
+    //         if($product)
+    //         {
+    //             $rating = Rating::where('product_id',$product->id)->get();
+    //             if($rating)
+    //             {
+    //                 $rating = [
+    //                     'average_rating' => $rating->avg('rating'),
+    //                     'total_reviews' => $rating->count(),
+    //                 ];
+                
+    //                 return response()->json([
+    //                     'status'=>200,
+    //                     'rating_data'=>[
+    //                         'rating'=>$rating,
+    //                     ]
+    //                 ]);
+    //             }
+    //             else
+    //         {
+    //             return response()->json([
+    //                 'status'=>400,
+    //                 'message'=>'No Product rating'
+    //             ]);
+    //         }
+    //         }
+    //         else
+    //         {
+    //             return response()->json([
+    //                 'status'=>404,
+    //                 'message'=>'No Such product Found'
+    //             ]);
+    //         }
+    // }
+
+    // public function index()
+    // {
+    //     $ratingProducts = Rating::with('product')->get();
+    //     $ratingProducts =[
+    //         'average_rating' => $rating->avg('rating'),
+    //         'total_reviews' => $rating->count(),
+    //     ];
+    //     return response()->json($ratingProducts);
+    // }
+    public function fatch(Request $request, $id) {
+        $product = Product::findOrFail($id);
+        $rating = $product->ratings()->avg('value');
+        return response()->json(['rating' => $rating]);
+        // $ratings = $product->ratings;
+        // return response()->json($ratings);
+    }    
 }
 
