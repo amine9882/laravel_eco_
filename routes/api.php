@@ -47,11 +47,12 @@ Route::post('validate-order', [CheckoutController::class, 'validateOrder']);
 
 // home
 Route::get('homefetchproducts', [HomeController::class, 'viewprod']);
-Route::get('homeproductsfeatured', [HomeController::class, 'featured']);
-Route::get('categoryidfour', [HomeController::class, 'four']);
-Route::get('categoryidone', [HomeController::class, 'one']);
-Route::get('categoryidtwo', [HomeController::class, 'two']);
-Route::get('categoryidthree', [HomeController::class, 'three']);
+Route::get('cateone', [HomeController::class, 'cate_one']);
+Route::get('catetwo', [HomeController::class, 'cate_two']);
+Route::get('catethree', [HomeController::class, 'cate_three']);
+Route::get('catefour', [HomeController::class, 'cate_four']);
+Route::get('store', [HomeController::class, 'store']);
+
 
 
 

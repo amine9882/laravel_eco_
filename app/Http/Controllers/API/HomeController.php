@@ -31,104 +31,76 @@ class HomeController extends Controller
             ]);
         }
     }
-
-    // featured
-    public function featured()
+    public function store()
     {
-        $product = Product::where('featured','1')->get();
-        if($product)
-        {
-            return response()->json([
-                'status'=>200,
-                'product'=>$product,
-            ]);
-        }
-        else
-        {
-            return response()->json([
-                'status'=>404,
-                'message'=>'No Product Found',
-            ]);
-        }
+        $cate = DB::table('products')
+        ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
+        ->join('categories', 'products.category_id', '=', 'categories.id')
+        ->select('products.id','products.category_id',DB::raw('categories.slug as category_slug'),'products.slug', 'products.name', 'products.description','products.brand','products.selling_price','products.original_price','products.qty', 'products.image', DB::raw('AVG(ratings.rating) as average_rating'))
+        ->take(12)
+        ->groupBy('products.id')
+        ->get();
+        return response()->json([
+            'status'=>200,
+            'cate' => $cate
+        ]);
     }
-    // one
-    
-    public function one()
+   
+    public function cate_one()
     {
-        $product = Product::where('category_id','1')->get();
-        if($product)
-        {
-            return response()->json([
-                'status'=>200,
-                'product'=>$product,
-            ]);
-        }
-        else
-        {
-            return response()->json([
-                'status'=>404,
-                'message'=>'No Product Found',
-            ]);
-        }
+        $cate_one = DB::table('products')
+        ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
+        ->join('categories', 'products.category_id', '=', 'categories.id')
+        ->select('products.id','products.category_id',DB::raw('categories.slug as category_slug'),'products.slug', 'products.name', 'products.description','products.brand','products.selling_price','products.original_price','products.qty', 'products.image', DB::raw('AVG(ratings.rating) as average_rating'))
+        ->where('products.category_id','=','1')
+        ->groupBy('products.id')
+        ->get();
+        return response()->json([
+            'status'=>200,
+            'cate_one' => $cate_one
+        ]);
     }
-    // two
-    public function two()
+    public function cate_two()
     {
-        $product = Product::where('category_id','2')->get();
-        if($product)
-        {
-            return response()->json([
-                'status'=>200,
-                'product'=>$product,
-            ]);
-        }
-        else
-        {
-            return response()->json([
-                'status'=>404,
-                'message'=>'No Product Found',
-            ]);
-        }
+        $cate_two = DB::table('products')
+        ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
+        ->join('categories', 'products.category_id', '=', 'categories.id')
+        ->select('products.id','products.category_id',DB::raw('categories.slug as category_slug'),'products.slug', 'products.name', 'products.description','products.brand','products.selling_price','products.original_price','products.qty', 'products.image', DB::raw('AVG(ratings.rating) as average_rating'))
+        ->where('products.category_id','=','2')
+        ->groupBy('products.id')
+        ->get();
+        return response()->json([
+            'status'=>200,
+            'cate_two' => $cate_two
+        ]);
     }
-    // three
-    public function three()
+    public function cate_three()
     {
-        $product = Product::where('category_id','3')->get();
-        if($product)
-        {
-            return response()->json([
-                'status'=>200,
-                'product'=>$product,
-            ]);
-        }
-        else
-        {
-            return response()->json([
-                'status'=>404,
-                'message'=>'No Product Found',
-            ]);
-        }
+        $cate_three = DB::table('products')
+        ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
+        ->join('categories', 'products.category_id', '=', 'categories.id')
+        ->select('products.id','products.category_id',DB::raw('categories.slug as category_slug'),'products.slug', 'products.name', 'products.description','products.brand','products.selling_price','products.original_price','products.qty', 'products.image', DB::raw('AVG(ratings.rating) as average_rating'))
+        ->where('products.category_id','=','3')
+        ->groupBy('products.id')
+        ->get();
+        return response()->json([
+            'status'=>200,
+            'cate_three' => $cate_three
+        ]);
     }
-    // four
-    public function four()
+    public function cate_four()
     {
-        $product = Product::where('category_id','4')->get();
-        if($product)
-        {
-            return response()->json([
-                'status'=>200,
-                'product'=>$product,
-            ]);
-        }
-        else
-        {
-            return response()->json([
-                'status'=>404,
-                'message'=>'No Product Found',
-            ]);
-        }
+        $cate_four = DB::table('products')
+        ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
+        ->join('categories', 'products.category_id', '=', 'categories.id')
+        ->select('products.id','products.category_id',DB::raw('categories.slug as category_slug'),'products.slug', 'products.name', 'products.description','products.brand','products.selling_price','products.original_price','products.qty', 'products.image', DB::raw('AVG(ratings.rating) as average_rating'))
+        ->where('products.category_id','=','4')
+        ->groupBy('products.id')
+        ->get();
+        return response()->json([
+            'status'=>200,
+            'cate_four' => $cate_four
+        ]);
     }
-
-
 }
 
