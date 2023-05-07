@@ -26,4 +26,22 @@ class OrderController extends Controller
             'orderitems' =>$orderitems
         ]);
     }
+    public function show($id)
+    {
+        $orderitems = Orderitems::find($id);
+        if($orderitems)
+        {
+            return response()->json([
+                'status'=>200,
+                'certifi'=>$orderitems,
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=>404,
+                'message'=>'No orderitem Found',
+            ]);
+        }
+    }
 }

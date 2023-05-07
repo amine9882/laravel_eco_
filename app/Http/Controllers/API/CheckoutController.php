@@ -94,6 +94,9 @@ class CheckoutController extends Controller
                         'product_id'=>$item->product_id,
                         'qty'=>$item->product_qty,
                         'price'=>$item->product->selling_price,
+                        'user_id'=>$item->user_id,
+                        
+                       
                     ];
 
                     $item->product->update([

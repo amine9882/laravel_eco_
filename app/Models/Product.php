@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use App\Models\Category;
+use App\Models\Rating;
+use App\Models\Orderitem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -31,8 +34,22 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
+    
+    // public function ratings()
+    // {
+    //     return $this->belongsTo(Rating::class, 'product_id', 'id');
+    // }
+
     public function ratings()
     {
         return $this->hasMany(Rating::class);
     }
+    public function orderitem()
+    {
+        return $this->hasMany(Orderitem::class);
+    }
+    
+    
+
+    
 }

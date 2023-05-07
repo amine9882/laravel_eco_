@@ -27,6 +27,10 @@ Route::get('/products/{id}/ratings',[RatingController::class, 'fatch']);
 // Route::get('/products/{id}/rating',  [RatingController::class, 'getProductRating']);
 // Route::get('/rating-products',[RatingController::class, 'index']);
 
+// Route::get('/products/{product_id}/avg-rating', [ProductController::class, 'getAverageRating']);
+
+
+
 
 
 
@@ -50,6 +54,12 @@ Route::get('categoryidtwo', [HomeController::class, 'two']);
 Route::get('categoryidthree', [HomeController::class, 'three']);
 
 
+
+Route::get('rating', [ProductController::class, 'rating']);
+
+Route::get('getRecommendedProducts', [ProductController::class, 'getRecommendedProducts']);
+
+
 Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function () {
     Route::get('/checkingAuthenticated', function () {
         return response()->json(['message'=>'You are in', 'status'=>200], 200);
@@ -69,6 +79,7 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function () {
      // Orders
      Route::get('admin/orders', [OrderController::class, 'index']);
      Route::get('admin/orderitems', [OrderController::class, 'store']);
+     Route::get('admin/orderitems/{id}', [OrderController::class, 'show']);
 
      //logout
     Route::post('logout', [AuthController::class, 'logout']);

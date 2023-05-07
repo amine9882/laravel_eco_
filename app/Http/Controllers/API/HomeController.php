@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Rating;
+use Illuminate\Support\Facades\DB;
+
 
 
 class HomeController extends Controller
@@ -125,6 +128,7 @@ class HomeController extends Controller
             ]);
         }
     }
+
 
 }
 

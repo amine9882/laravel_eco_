@@ -4,10 +4,12 @@ namespace App\Http\Controllers\API;
 use App\Models\Cart;
 
 use App\Models\Product;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 
 class ProductController extends Controller
@@ -165,5 +167,80 @@ class ProductController extends Controller
         }
     }
 
+    // public function getAverageRating($product_id)
+    // {
+       
+        
+    //     $product_rating_average = Rating::where('product_id',$product_id)->avg('rating');
+        
+    //     if( $product_rating_average!==null){
+    //         return response()->json([
+    //             'status'=>200,
+    //             'average_rating' => $product_rating_average
+    //         ]);
+    //     }
+    //     else if($product_rating_average === null)
+    //     {
+    //         return response()->json([
+    //             'status'=>403,
+    //             'average_rating' => 0,
+    //         ]);
+    //     }
+
+       
+    // }
     
+    public function rating()
+    {
+        $rating = Rating::where('rating', '>=', 4)->take(8)->get();;
+        
+        return response()->json([
+            'status' => 200,
+            'Rating' =>$rating
+        ]);
+    }
+    // public function trending()
+    // {
+    //     $products = Product::all();
+    //     foreach ($products as $product) {
+    //         $rating_sum = $product->ratings()->sum('rating');
+    //         $order_items_count = $product->order_items()->sum('quantity');
+    //         $product->trending_score = ($rating_sum * $order_items_count) / 10;
+    //     }
+    //     $trending_products = $products->sortByDesc('trending_score')->take(10);
+    //     return $trending_products;
+    // }
+
+    public function getRecommendedProducts()
+    {
+        // $popularProducts = DB::table('orderitems')
+        // ->join('ratings', 'orderitems.product_id', '=', 'ratings.product_id')
+        // ->select('orderitems.product_id', DB::raw('AVG(ratings.rating) as average_rating'), DB::raw('COUNT(*) as count'))
+        // ->groupBy('orderitems.product_id')
+        // ->orderByDesc('count')
+        // ->orderByDesc('average_rating')
+        // ->take(10)
+        // ->get();
+
+        // return response()->json([
+        //     'popular_products' => $popularProducts
+        // ]);
+
+        $popularProducts = DB::table('orderitems')
+        ->join('ratings', 'orderitems.product_id', '=', 'ratings.product_id')
+        ->join('products', 'orderitems.product_id', '=', 'products.id')
+        ->join('categories', 'products.category_id', '=', 'categories.id')
+        ->select('products.id','products.category_id',DB::raw('categories.slug as category_slug'),'products.slug', 'products.name', 'products.description','products.brand','products.selling_price','products.original_price','products.qty', 'products.image', DB::raw('AVG(ratings.rating) as average_rating'), DB::raw('COUNT(*) as count'))
+        ->groupBy('products.id')
+        ->orderByDesc('count')
+        ->orderByDesc('average_rating')
+        ->take(10)
+        ->get();
+        return response()->json([
+            'status'=>200,
+            'popular_products' => $popularProducts
+        ]);
+       
+    }
+
 }
