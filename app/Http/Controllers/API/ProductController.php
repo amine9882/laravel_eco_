@@ -230,7 +230,7 @@ class ProductController extends Controller
         ->join('ratings', 'orderitems.product_id', '=', 'ratings.product_id')
         ->join('products', 'orderitems.product_id', '=', 'products.id')
         ->join('categories', 'products.category_id', '=', 'categories.id')
-        ->select('products.id','products.category_id',DB::raw('categories.slug as category_slug'),'products.slug', 'products.name', 'products.description','products.brand','products.selling_price','products.original_price','products.qty', 'products.image', DB::raw('AVG(ratings.rating) as average_rating'), DB::raw('COUNT(*) as count'))
+        ->select('products.id','products.category_id',DB::raw('categories.slug as category_slug'),'products.slug', 'products.name', 'products.description','products.brand','products.selling_price','products.original_price','products.qty', 'products.image', DB::raw('AVG(ratings.rating) as average_rating'), DB::raw('COUNT(orderitems.product_id) as count'))
         ->groupBy('products.id')
         ->orderByDesc('count')
         ->orderByDesc('average_rating')

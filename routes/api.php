@@ -80,8 +80,9 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function () {
      // Orders
      Route::get('admin/orders', [OrderController::class, 'index']);
      Route::get('admin/orderitems', [OrderController::class, 'store']);
-     Route::get('admin/orderitems/{id}', [OrderController::class, 'show']);
-
+    //  Route::get('admin/orderitems/{id}', [OrderController::class, 'show']);
+     Route::put('update-orderitems/{id}', [OrderController::class, 'update']);
+     Route::get('admin/orderitems/{id}', [OrderController::class, 'getOrderItemData']);
      //logout
     Route::post('logout', [AuthController::class, 'logout']);
 
