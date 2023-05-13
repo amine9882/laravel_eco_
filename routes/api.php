@@ -11,13 +11,14 @@ use App\Http\Controllers\API\CheckoutController;
 use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\HomeController;
 use App\Http\Controllers\API\RatingController;
+use App\Http\Controllers\API\UserController;
 
 
 
 Route::post('register',[Authcontroller::class,'register'] );
 Route::post('login',[Authcontroller::class,'login'] );
 
-
+Route::get('/products/search', [ProductController::class, 'search']);
 Route::get('getCategory', [FrontendController::class, 'category']);
 Route::get('fetchproducts/{slug}',[FrontendController::class,'product']);
 Route::get('viewproductdetail/{category_slug}/{product_slug}', [FrontendController::class, 'viewproduct']);
@@ -83,6 +84,11 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function () {
     //  Route::get('admin/orderitems/{id}', [OrderController::class, 'show']);
      Route::put('update-orderitems/{id}', [OrderController::class, 'update']);
      Route::get('admin/orderitems/{id}', [OrderController::class, 'getOrderItemData']);
+     Route::delete('delete-item/{id}', [OrderController::class, 'destroy']);
+     //Users
+     Route::get('view-user', [UserController::class, 'index']);
+     Route::delete('delete-user/{id}', [UserController::class, 'destroy']);
+
      //logout
     Route::post('logout', [AuthController::class, 'logout']);
 

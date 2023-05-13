@@ -242,5 +242,31 @@ class ProductController extends Controller
         ]);
        
     }
+    public function search(Request $request)
+{
+    $query = $request->input('query');
+
+    $products = Product::where('name', 'LIKE', '%'.$query.'%')
+        ->leftJoin('ratings', 'products.id', '=', 'ratings.product_id')
+        ->select('products.*', DB::raw('AVG(ratings.rating) as rating_avg'))
+        ->groupBy('products.id')
+        ->get();
+    if($products)
+    {
+        return response()->json([
+            'status'=>200,
+            'data' => $products
+        ]);
+    }
+    elseif($products === null)
+    {
+        return response()->json([
+            'status'=>404,
+            'message'=>'No Product Found',
+        ]);
+
+    }
+   
+}
 
 }

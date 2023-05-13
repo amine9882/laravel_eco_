@@ -79,6 +79,20 @@ class OrderController extends Controller
                 'orders' => $data
             ]);
 
-
     }
+
+    public function destroy($id)
+    {
+        $item = orderitems::find($id);
+        if($item)
+        {
+            $item->delete();
+            return response()->json([
+                'status'=>200,
+                'message'=>'item Deleted Successfully',
+            ]);
+        }
+        
+    }
+
 }
