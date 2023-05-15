@@ -12,6 +12,7 @@ use App\Http\Controllers\API\OrderController;
 use App\Http\Controllers\API\HomeController;
 use App\Http\Controllers\API\RatingController;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\DashboradController;
 
 
 
@@ -88,6 +89,13 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function () {
      //Users
      Route::get('view-user', [UserController::class, 'index']);
      Route::delete('delete-user/{id}', [UserController::class, 'destroy']);
+    //Dashborad
+    Route::get('total-user', [DashboradController::class, 'NumberOfUsers']);
+    Route::get('total-product', [DashboradController::class, 'NumberOfProduct']);
+    Route::get('total-orders', [DashboradController::class, 'NumberOfOrders']);
+    Route::get('total-orders', [DashboradController::class, 'NumberOfOrders']);
+    Route::get('non-confirme', [DashboradController::class, 'NumberOfNonOrders']);
+    Route::get('order-items', [DashboradController::class, 'getOrderItemsPerLast7Days']);
 
      //logout
     Route::post('logout', [AuthController::class, 'logout']);
